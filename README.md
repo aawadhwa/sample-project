@@ -1,6 +1,6 @@
 This repo is inspired from  https://github.com/serverless/examples/tree/master/aws-node-express-dynamodb-api
 
-While the basic functionality has been kept the same, following are changes that has been done:
+While the basic functionality has been kept the same, following updates has been done:
 
 1. Refacored the code base to organize into controllers, services and repositories
 2. Added Swagger Documentation
