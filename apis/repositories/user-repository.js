@@ -11,9 +11,11 @@ exports.save = async (user) => {
     },
   };
   try {
-    await dynamoDbClient.put(params).promise();
+    return await dynamoDbClient.put(params).promise();
   } catch (e) {
-    console.error(e);
+    console.error(
+      `Error occured while saving user with user ${params}, error: ${e}`
+    );
     throw e;
   }
 };
@@ -25,12 +27,13 @@ exports.getUserById = async (userId) => {
       userId: userId,
     },
   };
-  console.log(`Get user by id for user ${userId}`);
   try {
     const { Item } = await dynamoDbClient.get(params).promise();
     return Item;
   } catch (e) {
-    console.error(e);
+    console.error(
+      `Error occured while fetching user with userId ${userId}, error: ${e}`
+    );
     throw e;
   }
 };

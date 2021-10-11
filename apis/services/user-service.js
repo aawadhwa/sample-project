@@ -2,7 +2,7 @@ const userRespository = require("../repositories/user-repository");
 
 exports.insertUser = async (user) => {
   try {
-    await userRespository.save(user);
+    const res = await userRespository.save(user);
   } catch (e) {
     throw e;
   }
@@ -10,7 +10,7 @@ exports.insertUser = async (user) => {
 
 exports.getUserById = async (userId) => {
   try {
-   return await userRespository.getUserById(userId);
+    return await userRespository.getUserById(userId);
   } catch (e) {
     throw e;
   }
