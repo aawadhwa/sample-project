@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  description: This is a swagger documentation of APIs created
+  version: 0.0.1
+  title: Technical Specification
+ 
+servers:
+  - url: https://gcvtx4amya.execute-api.us-east-1.amazonaws.com/
+    description: Deployed url
+
+
+tags:
+  - name: user
+    description: Operations related to User
+
+paths:
+  /users:
+    post:
+      tags:
+        - user
+      summary: User create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateRequest'
+      responses:
+        '200':
+          description: New user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '500':
+          description: Internal Server Error
+  /users/{userId}:
+    get:
+      tags:
+        - user
+      summary: Get User by id
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID of the user
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+
+
+
+components:
+    schemas:        
+      UserCreateRequest:
+        properties:
+          name:
+            type: string
+          userId:
+            type: string
+      UserResponse:
+        properties:
+          name:
+            type: string
+          userId:
+            type: string
