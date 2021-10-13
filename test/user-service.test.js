@@ -9,6 +9,7 @@ describe('user service methods', () => {
     beforeAll(() => {
         const result = { Item: { userId: '1', name: 'abhishek'}};
         sandbox.stub(aws.DynamoDB.DocumentClient.prototype, 'get').returns({promise: () => result});
+
     });
     afterAll(() => {
         sandbox.restore();
@@ -16,5 +17,13 @@ describe('user service methods', () => {
     it('get a user by userId', async () => {
         const {name} =  await userService.getUserById("1");
         expect(name).toEqual('abhishek');
+    });
+    
+    it('save user, expect user already exist error', async () => {
+        try {
+            const {name} =  await userService.insertUser({'userId': '1', 'name': 'testing'});
+        } catch(e) {
+            expect(e.status).toBe(409);
+        }
     });
 });
