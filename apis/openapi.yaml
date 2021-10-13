@@ -32,6 +32,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+        '409':
+          description: User already exist
         '500':
           description: Internal Server Error
   /users/{userId}:
@@ -55,6 +57,8 @@ paths:
                 $ref: '#/components/schemas/UserResponse'
         '404':
           description: User not found
+        '500':
+          description: Internal Server Error
 
 
 
