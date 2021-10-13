@@ -1,3 +1,4 @@
+const UserAlreadyExistError = require("../errors/UserAlreadyExistError");
 const userService = require("../services/user-service");
 const router = require("express").Router();
 
@@ -33,7 +34,11 @@ router.post("/", async function (req, res) {
     res.json({ userId, name });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: `Could not create user ${e}` });
+    if (error instanceof UserAlreadyExistError) {
+      res.status(error.status).json({ error: `${error.message}` });
+    } else {
+      res.status(500).json({ error: `Could not create user` });
+    }
   }
 });
 
